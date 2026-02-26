@@ -43,7 +43,7 @@ export class CarsService {
                 orderBy: { id: 'asc' },
             }),
             this.prisma.car.count({
-                where: whereCondition,
+                where: { ...whereCondition },
             }),
         ]);
 
