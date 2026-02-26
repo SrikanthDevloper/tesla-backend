@@ -24,7 +24,7 @@ export class CarsService {
         }),
         };
 
-        const [cars, totalCount] = await this.prisma.$transaction([
+        const [cars, totalCount] = await Promise.all([
             this.prisma.car.findMany({
                 select: {
                     id: true,
@@ -43,7 +43,7 @@ export class CarsService {
                 orderBy: { id: 'asc' },
             }),
             this.prisma.car.count({
-                where: { ...whereCondition },
+                where: whereCondition,
             }),
         ]);
 
